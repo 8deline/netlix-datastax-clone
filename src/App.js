@@ -3,25 +3,29 @@ import { useState, useEffect } from "react";
 import Section from "./components/section";
 
 function App() {
-  const genres = async () => {
+  let [genres, setGenres] = useState(null);
+  let fetchdata = async () => {
     const response = await fetch(".netlify/functions/getGenres");
     const responseBody = await response.json();
-    console.log(response);
-    console.log(responseBody);
-    console.log("test");
+    console.log(responseBody.data.reference_list.values);
+    setGenres(responseBody.data.reference_list.values);
   };
-
+  // console.log("test");
   useEffect(() => {
-    genres();
-  });
-  console.log("test");
+    fetchdata();
+  }, []);
   //genres();
   return (
     <>
-      <Section />
+      {genres
+        ? genres.map((genre) => {
+            return <Section key={genre.value} genre={genre.value} />;
+          })
+        : ""}
     </>
   );
 }
+
 // const response = fetch("/.netlify/functions/getGenres");
 // const responseBody = response.JSON();
 // console.log(responseBody);
