@@ -1,10 +1,15 @@
 const fetch = require("node-fetch");
 
-exports.handler = async function () {
+exports.handler = async function (event) {
+  // console.log("this is the eventbody");
+  // console.log(event.body);
+  const body = JSON.parse(event.body);
+  // console.log(body);
+  const genre = body.genre;
   const url = process.env.ASTRA_GRAPHQL_ENDPOINT;
   const query = `
   query {
-    movies_by_genre (value: {genre: "Sci-Fi"} ) 
+    movies_by_genre (value: {genre: ${JSON.stringify(genre)}} ) 
     {values {
             title
         duration
@@ -24,7 +29,7 @@ exports.handler = async function () {
       "x-cassandra-token": process.env.ASTRA_DB_APPLICATION_TOKEN,
     },
   });
-
+  // console.log(event.body);
   try {
     const responseBody = await response.json();
     return {

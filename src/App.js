@@ -7,7 +7,6 @@ function App() {
   let fetchdata = async () => {
     const response = await fetch(".netlify/functions/getGenres");
     const responseBody = await response.json();
-    console.log(responseBody.data.reference_list.values);
     setGenres(responseBody.data.reference_list.values);
   };
   // console.log("test");
