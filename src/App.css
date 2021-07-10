@@ -1,3 +1,7 @@
 .movies {
   display: flex;
 }
+
+video {
+  width: 100px;
+}

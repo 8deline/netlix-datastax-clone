@@ -7,16 +7,19 @@ exports.handler = async function (event) {
   // console.log(body);
   const genre = body.genre;
   const url = process.env.ASTRA_GRAPHQL_ENDPOINT;
+  console.log(event.body);
   const query = `
   query {
-    movies_by_genre (value: {genre: ${JSON.stringify(genre)}} ) 
+    movies_by_genre (value: {genre: ${JSON.stringify(genre)}}
+    options: {pageSize: 6 pageState: ${JSON.stringify(body.pageState)}}) 
     {values {
             title
         duration
         thumbnail
         }
-        
+     pageState   
     }
+
   }
   
     `;
