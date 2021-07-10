@@ -1,11 +1,14 @@
 const fetch = require("node-fetch");
 
-exports.handler = async function () {
+exports.handler = async function (event) {
+  const body = JSON.parse(event.body);
+  const limit = body.limit;
   const url = process.env.ASTRA_GRAPHQL_ENDPOINT;
   const query = `
   query getAllGenres {
     reference_list (
         value: { lable: "genre" }
+        options: {limit: ${JSON.stringify(limit)}}
         ) {
       values {
         value

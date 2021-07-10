@@ -4,11 +4,20 @@ import Section from "./components/section";
 
 function App() {
   let [genres, setGenres] = useState(null);
+  let [limit, setLimit] = useState(4);
+
   let fetchdata = async () => {
-    const response = await fetch(".netlify/functions/getGenres");
+    const response = await fetch(".netlify/functions/getGenres", {
+      method: "POST",
+      body: JSON.stringify({ limit: limit }),
+    });
     const responseBody = await response.json();
     setGenres(responseBody.data.reference_list.values);
+    setLimit(() => limit + 4);
+    console.log(limit);
+    console.log("test");
   };
+
   // console.log("test");
   useEffect(() => {
     fetchdata();
@@ -21,6 +30,12 @@ function App() {
             return <Section key={genre.value} genre={genre.value} />;
           })
         : ""}
+      <button
+        onClick={() => {
+          setLimit();
+          fetchdata();
+        }}
+      ></button>
     </>
   );
 }
