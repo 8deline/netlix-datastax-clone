@@ -18,11 +18,11 @@ function App() {
     console.log("test");
   };
 
-  // console.log("test");
+  console.log("test");
   useEffect(() => {
     fetchdata();
   }, []);
-  //genres();
+
   return (
     <>
       {genres

@@ -16,11 +16,11 @@ function Section(props) {
     setMovies(responseBody.data.movies_by_genre.values);
     setPageState(responseBody.data.movies_by_genre.pageState);
   };
-  // console.log("test");
+
   useEffect(() => {
     fetchdata();
   }, []);
-  //genres();
+
   return (
     <>
       <p>{props.genre}</p>
