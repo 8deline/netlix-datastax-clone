@@ -27,11 +27,13 @@ function App() {
     <>
       <Navbar />
       <HeroSection />
-      {genres
-        ? genres.map((genre) => {
-            return <Section key={genre.value} genre={genre.value} />;
-          })
-        : ""}
+      <div className="container">
+        {genres
+          ? genres.map((genre) => {
+              return <Section key={genre.value} genre={genre.value} />;
+            })
+          : ""}
+      </div>
       <div
         className="bottom-page"
         onMouseEnter={() => {

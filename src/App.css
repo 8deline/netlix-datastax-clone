@@ -1,13 +1,48 @@
+body {
+  background-color: #141414;
+  color: #fff;
+  font-family: "Helvetica Neue", sans-serif;
+}
+.container {
+  margin: 0 50px;
+}
+
 .movies {
   display: flex;
 }
 
+.movies:focus-within.card,
+.movies:focus,
 .card {
-  width: 100px;
+  transform: translate(-25%);
+  z-index: 1;
+}
+
+.movies .card:focus,
+.movies .card:hover {
+  transform: scale(1.5);
+  z-index: 1;
+}
+
+.card {
+  width: 230px;
+  border-radius: 5px;
+  margin: 2px;
+  transition: transform 500ms;
+  position: relative;
+  display: block;
+}
+.card:focus ~ .card,
+.card:hover ~ .card {
+  transform: translate(25%);
 }
 
 video {
   width: 100%;
+  border-radius: 5px;
+}
+video::-webkit-media-controls {
+  display: none;
 }
 
 .bottom-page {
