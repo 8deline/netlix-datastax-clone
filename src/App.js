@@ -1,6 +1,8 @@
 import fetch from "node-fetch";
 import { useState, useEffect } from "react";
 import Section from "./components/section";
+import HeroSection from "./components/HeroSection";
+import Navbar from "./components/Navbar";
 
 function App() {
   let [genres, setGenres] = useState(null);
@@ -13,29 +15,29 @@ function App() {
     });
     const responseBody = await response.json();
     setGenres(responseBody.data.reference_list.values);
-    setLimit(() => limit + 4);
+    setLimit(limit + 4);
     console.log(limit);
-    console.log("test");
   };
 
-  console.log("test");
   useEffect(() => {
     fetchdata();
   }, []);
 
   return (
     <>
+      <Navbar />
+      <HeroSection />
       {genres
         ? genres.map((genre) => {
             return <Section key={genre.value} genre={genre.value} />;
           })
         : ""}
-      <button
-        onClick={() => {
-          setLimit();
+      <div
+        className="bottom-page"
+        onMouseEnter={() => {
           fetchdata();
         }}
-      ></button>
+      ></div>
     </>
   );
 }

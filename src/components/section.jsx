@@ -15,6 +15,7 @@ function Section(props) {
     // console.log(responseBody.data.movies_by_genre.values);
     setMovies(responseBody.data.movies_by_genre.values);
     setPageState(responseBody.data.movies_by_genre.pageState);
+    console.log(pageState);
   };
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function Section(props) {
 
   return (
     <>
-      <p>{props.genre}</p>
+      <h2 id={props.genre}>{props.genre}</h2>
       <div className="movies">
         {movies
           ? movies.map((movie, index) => {
@@ -33,7 +34,6 @@ function Section(props) {
         <button
           className="button"
           onClick={() => {
-            setPageState(pageState);
             fetchdata();
           }}
         ></button>
